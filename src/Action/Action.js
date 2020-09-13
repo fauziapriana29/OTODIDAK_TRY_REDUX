@@ -1,11 +1,14 @@
 import axios from 'axios'
 
-export const ambilData = async () => {
+export const ambilData = () => {
 
-    const data = await axios.get('https://ghibliapi.herokuapp.com/films')
+    return async function (dispatch) {
+      const data = await axios.get("https://ghibliapi.herokuapp.com/films");
 
-    return {
-        type: "AMBIL_DATA",
-        data: data,
-    }
+        dispatch({
+          type: "AMBIL_DATA",
+          data: data,
+        });
+    };
+
 }
