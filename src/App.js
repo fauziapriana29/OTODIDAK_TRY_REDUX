@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import { connect } from 'react-redux'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { ambilData } from './Action/Action.js'
+
+
+export class App extends Component {
+
+  componentDidMount() {
+    this.props.ambilData()
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>App</h1>
+      </div>
+    );
+  }
+
 }
 
-export default App;
+const stateToProps = (state) => {
+  return {
+    listFilm : state.listFilm
+  }
+}
+
+export default connect(stateToProps, {ambilData})(App);
