@@ -8,41 +8,22 @@ export class App extends Component {
     this.props.ambilData();
   }
 
-  displayList() {
-
-    if (!this.props.listFilm.data) {
-      return null;
+  renderList() {
+    const listFilm = this.props.ambilData.data;
+    if (!listFilm) {
+      return "loading";
     }
-
-    const filmData = this.props.listFilm.data;
-    
-    
-
-    return filmData.map(film => {
+    return listFilm.map((film) => {
       return (
-        <div>
-          <table className="table table-striped table-dark">
-            <thead>
-              <tr>
-                <th scope="col">No.</th>
-                <th scope="col">Title</th>
-                <th scope="col">Year</th>
-                <th scope="col">Producer</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">{film.id}</th>
-                <td>{film.title}</td>
-                <td>{film.release_date}</td>
-                <td>{film.producer}</td>
-                <td>
-                  <button className="btn btn-secondary">Detail</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="card">
+          <h5 className="card-header">Movie No.{film.id}</h5>
+          <div className="card-body">
+            <h5 className="card-title">{film.title}</h5>
+            <p className="card-text">{film.description}</p>
+            <a href="#" className="btn btn-primary">
+              Go somewhere
+            </a>
+          </div>
         </div>
       );
     });
@@ -53,7 +34,7 @@ export class App extends Component {
     return (
       <div>
         <h1>App</h1>
-        {this.displayList}
+        {this.renderList()}
       </div>
     );
   }
